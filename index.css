@@ -1,0 +1,571 @@
+:root {
+  --bg-color: #f5e6e3;; /* Un blanco hueso, más cálido */
+  --text-color: #3d3431;
+  --accent-color: #bfa688; /* Un dorado suave */
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Ocultamos cursor nativo */ }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ACTUALIZACIÓN CURSOR EN CSS */
+.cursor-dot, .cursor-outline {
+  /* ... tus estilos anteriores ... */
+  pointer-events: none; /* CRUCIAL: Esto permite dar clic a través del círculo */
+  mix-blend-mode: difference; /* Efecto artístico: invierte el color sobre fotos */
+  z-index: 9999;
+}
+
+.cursor-dot { display: none; } /* Ocultamos el punto, dejamos solo el círculo elegante */
+
+/* Elimina cualquier "cursor: none" del body o * */
+body { cursor: default; }
+a, button { cursor: pointer; }
+
+/* --- NAV --- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 5%;
+  background: transparent; /* Transparente para flotar */
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  mix-blend-mode: difference; /* Efecto cool sobre fotos oscuras */
+  color: #fff;
+}
+
+.logo { 
+    font-family: var(--font-sans); 
+    font-weight: 300; 
+    letter-spacing: 4px; 
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+.nav nav { display: flex; gap: 30px; }
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+}
+.nav a span { color: var(--accent-color); margin-right: 5px; }
+
+/* --- HERO --- */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+}
+.hero-bg img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.6); /* Oscurecer para leer texto */
+    transform: scale(1.1);
+    animation: zoomIn 20s infinite alternate;
+}
+
+@keyframes zoomIn { from {transform: scale(1);} to {transform: scale(1.15);} }
+
+.hero-content h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 30px;
+}
+.hero-content h2 em { font-family: var(--font-sans); font-style: normal; font-weight: 300; font-size: 0.5em; vertical-align: middle;}
+.hero-subtitle { color: #ddd; letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 20px;}
+
+.cta {
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 15px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    transition: all 0.4s ease;
+}
+.cta:hover { background: #fff; color: #000; }
+
+/* --- GENERAL SECTIONS --- */
+.section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
+.section h3 { 
+    font-family: var(--font-serif); 
+    font-size: 3rem; 
+    margin-bottom: 20px; 
+    font-weight: 400;
+}
+
+/* --- ABOUT --- */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-text p { font-size: 1.1rem; margin-bottom: 20px; color: #555; }
+.highlight { font-family: var(--font-serif); font-style: italic; font-size: 1.2em; color: var(--text-color); }
+
+/* --- CAROUSEL (RE-STYLED) --- */
+.carousel { margin-top: 40px; display: grid; grid-template-columns: 60px 1fr 60px; gap: 20px; align-items: center; }
+.car-viewport { border-radius: 0; border: none; overflow: hidden; }
+.car-btn {
+    border: none; background: transparent; font-size: 3rem; 
+    font-family: var(--font-serif); color: var(--text-color);
+    transition: transform 0.2s;
+}
+.car-btn:hover { transform: scale(1.2); }
+
+.slide { grid-template-rows: 1fr auto; gap: 20px; }
+.slide .img-wrapper { overflow: hidden; height: 600px; }
+.slide img { 
+    height: 100%; width: 100%; object-fit: cover; 
+    transition: transform 0.7s ease;
+    filter: grayscale(30%);
+}
+.slide:hover img { transform: scale(1.05); filter: grayscale(0%); }
+
+.slide-meta { 
+    display: flex; gap: 20px; align-items: flex-start; padding: 0 10px; 
+}
+.slide-num { font-family: var(--font-serif); font-size: 2rem; color: #ccc; line-height: 1;}
+.slide-meta h4 { font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 400;}
+.slide-meta p { font-family: var(--font-serif); font-style: italic; color: #777; }
+
+/* --- CONTACT --- */
+.contact-wrapper { text-align: center; border-top: 1px solid #eee; padding-top: 80px;}
+.big-email {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 6vw, 5rem);
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 40px 0;
+    transition: color 0.3s;
+}
+.big-email:hover { color: var(--accent-color); font-style: italic;}
+.contact-footer { display: flex; justify-content: center; gap: 40px; }
+.contact-footer a { color: #888; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+/* --- ANIMACIONES DE SCROLL (REVEAL) --- */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav { position: relative; background: #000; padding: 20px; mix-blend-mode: normal;} 
+    .nav nav { display: none; } /* Simplificado para demo */
+    .about-grid { grid-template-columns: 1fr; }
+    .carousel { grid-template-columns: 1fr; }
+    .car-btn { display: none; } /* En móvil se usa swipe */
+    .slide img { height: 400px; }
+    .cursor-dot, .cursor-outline { display: none; } /* Sin cursor custom en táctil */
+    * { cursor: auto; }
+}
+
+/* --- ICONOS SOCIALES --- */
+.contact-footer {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Espacio entre iconos */
+  margin-top: 10px;
+}
+
+.contact-footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #888; /* Color inicial (gris elegante) */
+  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+/* El SVG hereda el color del texto gracias a fill: currentColor en el HTML */
+.social-icon {
+  width: 28px;  /* Tamaño del icono */
+  height: 28px;
+  fill: currentColor; 
+}
+
+/* Hover: cambia color y sube un poquito */
+.contact-footer a:hover {
+  color: var(--accent-color); /* Se pone dorado */
+  transform: translateY(-5px); /* Flota hacia arriba */
+  background: rgba(191, 166, 136, 0.1); /* Fondo sutil al hacer hover */
+}
+
+/* --- ICONO DEL EMAIL GRANDE --- */
+.icon-big {
+  width: 0.8em; /* Escala relativo al tamaño de la letra */
+  height: 0.8em;
+  margin-right: 15px;
+  fill: currentColor;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+
+/* --- MARQUEE (CINTA CORREDIZA) --- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background: var(--text-color); /* Fondo oscuro */
+  color: var(--bg-color); /* Texto claro */
+  padding: 15px 0;
+  position: relative;
+  z-index: 5;
+  transform: rotate(-2deg); /* ¡TRUCO! Un leve ángulo lo hace ver rebelde */
+  margin: -20px 0 40px 0; /* Superposición negativa para romper la grilla */
+  border: 1px solid var(--accent-color);
+}
+
+.marquee-content {
+  display: flex;
+  white-space: nowrap;
+  animation: scrollText 20s linear infinite;
+}
+
+.marquee-content span {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  margin-right: 0;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- PRELOADER (TELÓN) --- */
+.preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--text-color); /* Fondo oscuro elegante */
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1); /* Animación suave tipo "slide up" */
+}
+
+.preloader-text {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: var(--accent-color);
+  letter-spacing: 5px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Clase para ocultarlo */
+.preloader.hide {
+  transform: translateY(-100%); /* El telón sube */
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* --- STICKY DECK (MAZO DE CARTAS) --- */
+.projects-deck {
+  padding: 100px 5%;
+  background: var(--bg-color);
+  position: relative;
+}
+
+.deck-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.deck-header h3 { font-family: var(--font-serif); font-size: 3.5rem; }
+
+.cards-container {
+  /* No necesitamos mucha magia aquí, el trabajo lo hacen las cartas */
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* LA CARTA BASE */
+.card {
+  position: sticky; /* ¡EL TRUCO! Se pega al scroll */
+  top: 100px; /* Distancia desde arriba donde se pegará */
+  height: 80vh; /* Altura de la carta */
+  margin-bottom: 50px; /* Espacio para que la siguiente tenga recorrido */
+  
+  /* Estética de la carta */
+  background: #fff; /* Fondo blanco limpio */
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 20px; /* Bordes suaves modernos */
+  overflow: hidden;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); /* Sombra elegante */
+  
+  /* Animación de entrada suave */
+  transform-origin: center top;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Ajustes de color para cada carta para darle variedad sutil */
+#card1 { background: #fffcfb; }
+#card2 { background: #f4f1ee; }
+#card3 { background: #fff; }
+
+.card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Texto izquierda, Foto grande derecha */
+  height: 100%;
+}
+
+/* --- CONTENIDO DE TEXTO --- */
+.card-content {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.card-number {
+  font-family: var(--font-serif);
+  font-size: 6rem;
+  color: rgba(191, 166, 136, 0.2); /* Dorado muy transparente */
+  position: absolute;
+  top: 20px; left: 30px;
+  line-height: 1;
+}
+
+.card-content h4 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  z-index: 2;
+}
+.card-content h4 em {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  text-transform: none;
+  display: block;
+  color: var(--accent-color);
+  line-height: 0.9;
+}
+
+.card-content p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 30px;
+  max-width: 400px;
+  z-index: 2;
+}
+
+/* ETIQUETAS (TAGS) */
+.card-tags {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+.card-tags li {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: #888;
+  transition: all 0.3s;
+}
+.card-tags li:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* --- IMAGEN --- */
+.card-image {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease; /* Zoom lento al hover */
+}
+
+/* Efecto Hover: La imagen se acerca lentamente */
+.card:hover .card-image img {
+  transform: scale(1.1);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .card-inner { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .card-content { padding: 30px; }
+  .card-number { font-size: 4rem; top: 10px; right: 20px; left: auto; }
+  .card-content h4 em { font-size: 2.5rem; }
+  .card { height: auto; min-height: 80vh; top: 80px;}
+}
+
+/* --- CONTACTO EDITORIAL --- */
+.contact-editorial {
+  padding: 120px 5% 40px; /* Mucho espacio arriba */
+  background: var(--bg-color);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0,0,0,0.1); /* Línea sutil separadora */
+}
+
+/* Header pequeño */
+.mini-label {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.cta-header h3 {
+  font-family: var(--font-sans);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.cta-header h3 em {
+  font-family: var(--font-serif);
+  font-size: 1.1em;
+  text-transform: none;
+  color: var(--accent-color);
+}
+
+/* CORREO GIGANTE ANIMADO */
+.giant-mail {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 8vw, 7rem); /* Se adapta a pantalla */
+  color: var(--text-color);
+  text-decoration: none;
+  position: relative;
+  margin-bottom: 60px;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.giant-mail:hover {
+  color: var(--accent-color);
+  font-style: italic; /* Un toque chic al pasar el mouse */
+}
+
+/* Línea subrayada animada */
+.underline-anim {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.giant-mail:hover .underline-anim {
+  width: 100%;
+}
+
+/* --- BOTONES PASTILLA (SOCIAL PILLS) --- */
+.social-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+
+.social-pill {
+  text-decoration: none;
+  border: 1px solid var(--text-color);
+  padding: 15px 40px;
+  border-radius: 100px; /* Forma de pastilla perfecta */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rebote suave */
+}
+
+.pill-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* HOVER DIVERTIDO */
+.social-pill:hover {
+  background: var(--text-color);
+  color: var(--bg-color); /* Invierte colores */
+  transform: scale(1.1) rotate(-3deg); /* ¡El efecto divertido! Crece y gira un poco */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* El segundo botón gira al otro lado para variedad */
+.social-pill:nth-child(even):hover {
+  transform: scale(1.1) rotate(3deg); 
+}
+
+.social-pill:hover .pill-icon {
+  transform: translate(5px, -5px); /* La flecha se va arriba a la derecha */
+}
+
+/* --- LEGAL FOOTER --- */
+.legal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #888;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 30px;
+}
+
+.back-top {
+  text-decoration: none;
+  color: var(--text-color);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .social-grid { justify-content: center; }
+  .legal-footer { flex-direction: column; gap: 20px; }
+  .giant-mail { text-align: center; }
+}
