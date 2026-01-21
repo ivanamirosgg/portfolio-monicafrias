@@ -75,3 +75,24 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+// --- MENÚ HAMBURGUESA ---
+const hamburger = document.querySelector('.hamburger');
+const mobileNav = document.querySelector('.mobile-nav');
+const logo = document.querySelector('.logo');
+const mobileLinks = document.querySelectorAll('.mob-link');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    logo.classList.toggle('active'); // Para que el logo se ponga blanco
+});
+
+// Cerrar menú al dar clic en un enlace
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        logo.classList.remove('active');
+    });
+});

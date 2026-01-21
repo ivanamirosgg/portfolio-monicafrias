@@ -569,3 +569,54 @@ a, button { cursor: pointer; }
   .legal-footer { flex-direction: column; gap: 20px; }
   .giant-mail { text-align: center; }
 }
+
+/* --- MENÚ MÓVIL (HAMBURGUESA) --- */
+
+/* Por defecto ocultamos el botón en PC */
+.hamburger { display: none; }
+.mobile-nav { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: var(--text-color);
+    z-index: 9; /* Detrás del header pero encima del contenido */
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 40px;
+    transform: translateY(-100%); /* Oculto arriba */
+    transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.mob-link {
+    font-family: var(--font-serif);
+    font-size: 3rem; color: var(--bg-color);
+    text-decoration: none; opacity: 0;
+    transition: opacity 0.4s ease 0.3s; /* Retraso para efecto elegante */
+}
+
+/* Cuando el menú está activo */
+.mobile-nav.active { transform: translateY(0); }
+.mobile-nav.active .mob-link { opacity: 1; }
+
+/* ESTILOS SOLO PARA CELULAR */
+@media (max-width: 768px) {
+    .desktop-nav { display: none; } /* Ocultamos menú de PC */
+    
+    .hamburger {
+        display: block; cursor: pointer; background: none; border: none;
+        z-index: 11; width: 30px; height: 20px; position: relative;
+    }
+    
+    .bar {
+        display: block; width: 100%; height: 2px; 
+        background-color: var(--text-color); /* Color oscuro normal */
+        position: absolute; transition: all 0.3s ease;
+    }
+    .bar:first-child { top: 0; }
+    .bar:last-child { bottom: 0; }
+
+    /* Animación a "X" y cambio de color a blanco */
+    .hamburger.active .bar { background-color: var(--bg-color); }
+    .hamburger.active .bar:first-child { top: 9px; transform: rotate(45deg); }
+    .hamburger.active .bar:last-child { bottom: 9px; transform: rotate(-45deg); }
+    
+    /* Ajuste de logo para que se vea blanco sobre el menú oscuro */
+    .logo.active { color: var(--bg-color); position: relative; z-index: 11;}
+}
